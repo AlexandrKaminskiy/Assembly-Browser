@@ -7,7 +7,17 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <TreeView x:Name="treeView" Margin="-1,2,262,155"/>
+        <TreeView x:Name="treeView" Margin="3,11,258,105">
+            <TreeViewItem x:Name="AssemblyInfo" Header="Assemblies" Height="281" IsExpanded="True">
+                <TreeViewItem x:Name="NameSpaces" Header="Namespaces" Height="221" IsExpanded="True">
+                    <TreeViewItem x:Name="Types" Header="Types" IsExpanded="True">
+                        <TreeViewItem x:Name="Fields" Header="Methods"/>
+                        <TreeViewItem x:Name="Methods" Header="Fields"/>
+                        <TreeViewItem x:Name="Properties" Header="Properties"/>
+                    </TreeViewItem>
+                </TreeViewItem>
+            </TreeViewItem>
+        </TreeView>
 
     </Grid>
 </Window>

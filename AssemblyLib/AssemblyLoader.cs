@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
 
 namespace AssemblyLib
@@ -11,30 +12,49 @@ namespace AssemblyLib
         public void LoadAssembly()
         {
             Assembly assembly = Assembly.LoadFrom(path + "AssemblyLib.dll");
+
             string name = assembly.GetName().Name;
+
             var types = assembly.GetTypes();
+            AssemblyInfo assemblyInfo = new AssemblyInfo();
+            assemblyInfo.Name = assembly.GetName().Name;
+
+            List<TypeInfo> typeInfos = new List<TypeInfo>();
+
+            assemblyInfo.Types = typeInfos;
+            foreach(var type in types)
+            {
+                TypeInfo typeInfo = new TypeInfo();
+                typeInfo.Name = type.Name;
+                var meths = type.GetMethods();
+                var fields = type.GetFields();
+                var props = type.GetProperties();
+
+                List<string> propsInfo = new List<string>();
+                foreach (var prop in props)
+                {
+                    propsInfo.Add(propInfo(prop));
+                }
+
+                List<string> fieldsInfo = new List<string>();
+                foreach (var field in fields)
+                {
+                    fieldsInfo.Add(fieldInfo(field));
+                }
+
+                List<string> methsInfo = new List<string>();
+                foreach (var meth in meths)
+                {
+                    methsInfo.Add(methodSignature(meth));
+                }
+                
+                typeInfo.PropertiesInfo = propsInfo;
+                typeInfo.MethodsInfo = methsInfo;
+                typeInfo.FieldsInfo = fieldsInfo;
+
+                typeInfos.Add(typeInfo);
+            }
             Console.WriteLine(assembly.GetTypes()[0].Name);
-            var meths = assembly.GetTypes()[0].GetMethods();
-            var fields = assembly.GetTypes()[0].GetFields();
-            var props = assembly.GetTypes()[0].GetProperties();
-
-            foreach (var prop in props)
-            {
-                string s = propInfo(prop);
-                Console.WriteLine(s);
-            }
-
-            foreach (var field in fields)
-            {
-                string s = fieldInfo(field);
-                Console.WriteLine(s);
-            }
-
-            foreach (var meth in meths)
-            {
-                string s = methodSignature(meth);
-                Console.WriteLine(s);
-            }
 
             Console.WriteLine();
         }
