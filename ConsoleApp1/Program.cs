@@ -8,7 +8,7 @@ namespace ConsoleApp1
         static void Main(string[] args)
         {
             AssemblyLoader asseblyLoader = new AssemblyLoader();
-            asseblyLoader.LoadAssembly();
+            var ass = asseblyLoader.LoadAssembly("dwdw");
             Console.WriteLine("Hello World!");
         }
     }

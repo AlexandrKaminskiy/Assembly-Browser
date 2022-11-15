@@ -1,5 +1,8 @@
-﻿using System;
+﻿using AssemblyLib.ViewModel;
+using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,15 +18,20 @@ using System.Windows.Shapes;
 
 namespace BrowserDemo
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
         {
-            
             InitializeComponent();
+            var viewModel = new ViewModel();
+            DataContext = viewModel;
+            var commandBinding = new CommandBinding();
+            commandBinding.Command = ApplicationCommands.Open;
+            commandBinding.Executed += viewModel.LoadDll;
+            Open.CommandBindings.Add(commandBinding);
+            //ObservableCollection<Node> nodes = new ObservableCollection<Node>();
+            //treeView.ItemsSource = nodes;
+
         }
     }
 }

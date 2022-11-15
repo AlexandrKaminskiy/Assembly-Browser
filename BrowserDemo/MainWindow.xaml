@@ -5,19 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BrowserDemo"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <TreeView x:Name="treeView" Margin="3,11,258,105">
-            <TreeViewItem x:Name="AssemblyInfo" Header="Assemblies" Height="281" IsExpanded="True">
-                <TreeViewItem x:Name="NameSpaces" Header="Namespaces" Height="221" IsExpanded="True">
-                    <TreeViewItem x:Name="Types" Header="Types" IsExpanded="True">
-                        <TreeViewItem x:Name="Fields" Header="Methods"/>
-                        <TreeViewItem x:Name="Methods" Header="Fields"/>
-                        <TreeViewItem x:Name="Properties" Header="Properties"/>
-                    </TreeViewItem>
-                </TreeViewItem>
-            </TreeViewItem>
+        Title="MainWindow" Height="313" Width="570">
+    <Grid Margin="0,0,-112,0" Height="379" VerticalAlignment="Top" RenderTransformOrigin="0.497,0.492">
+        <TreeView x:Name="treeView" Margin="38,9,430,166" ItemsSource="{Binding Nodes}">
+            <TreeView.ItemTemplate>
+                <HierarchicalDataTemplate ItemsSource="{Binding Path=Nodes}">
+                    <TextBlock Text="{Binding Name}" />
+                </HierarchicalDataTemplate>
+            </TreeView.ItemTemplate>
         </TreeView>
-
+        <Button x:Name="Open" Content="Open" HorizontalAlignment="Left" Margin="41,232,0,0" VerticalAlignment="Top" Command="Open"/>
     </Grid>
 </Window>
